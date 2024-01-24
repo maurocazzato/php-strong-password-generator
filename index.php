@@ -26,15 +26,15 @@ session_start();
     </form>
 
     <?php
-    // Check if the form is submitted
+ 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        // Include the password generation function
+       
         include 'functions.php';
 
-        // Get password length from the form
+        
         $password_length = isset($_GET['password_length']) ? (int)$_GET['password_length'] : 8;
 
-        // Generate and display the password
+        // genera passw 
         $password = generatePassword($password_length);
         echo "<p>La tua password: <strong>$password</strong></p>";
     }
