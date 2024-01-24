@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,26 +14,30 @@ session_start();
 
 
 <body>
-    <section>
-        <h1>Password Generator</h1>
-        <form action="index.php" method="GET">
-            <label for="password-length"> Lunghezza Password:</label>
-            <input type="number" id="password-length" name="password_length" min="8" max="32" required>
-            <button type="submit">Genera</button>
-        </form>
+<section>
+    <h1>Generatore di Password Sicure</h1>
 
-        <?php
+    <form action="index.php" method="GET">
+        <label for="password_length">Lunghezza della password:</label>
+        <input type="number" id="password_length" name="password_length" min="1" required>
+        <button type="submit">Genera</button>
+    </form>
+
+    <?php
     
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            include 'functions.php';
+    if (isset($_GET['password_length'])) {
+        $password_length = $_GET['password_length'];
 
-            $password_length = isset($_GET['password_length']) ? (int)$_GET['password_length'] : 8;
+        
+        require_once __DIR__ . '/functions.php';
 
-            // genera passw 
-            $password = generatePassword($password_length);
-            echo "<p>La tua password: <strong>$password</strong></p>";
-        }
-        ?>
-    </section>
+       
+        $generated_password = generate_password($password_length);
+
+        // Mostra la password generata
+        echo '<p>Password generata: ' . $generated_password . '</p>';
+    }
+    ?>
+</section>
 </body>
 </html>
